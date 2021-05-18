@@ -249,7 +249,7 @@ struct MySQL_binding {
     PyObject *str_value;
     union {
         long long l;
-        float f;
+        double d;
         MYSQL_TIME t;
     } buffer;
 };
