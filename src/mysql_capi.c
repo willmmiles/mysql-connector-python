@@ -3042,9 +3042,9 @@ MySQLPrepStmt_execute(MySQLPrepStmt *self, PyObject *args)
         /* FLOAT */
         if (PyFloat_Check(value))
         {
-            pbind->buffer.f= (float)PyFloat_AsDouble(value);
-            mbind->buffer= &pbind->buffer.f;
-            mbind->buffer_type= MYSQL_TYPE_FLOAT;
+            pbind->buffer.d= PyFloat_AsDouble(value);
+            mbind->buffer= &pbind->buffer.d;
+            mbind->buffer_type= MYSQL_TYPE_DOUBLE;
             mbind->is_null= (bool_ *)0;
             mbind->length= 0;
             continue;

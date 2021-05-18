@@ -247,7 +247,7 @@ MySQL_create_prep_stmt(MySQL *self);
 struct MySQL_binding {
     PyObject *str_value;
     union {
-        float f;
+        double d;
         long long ll;
         MYSQL_TIME t;
     } buffer;
