@@ -484,13 +484,12 @@ class MySQLProtocol(object):
             elif field[1] == FieldType.TIME:
                 (packet, value) = self._parse_binary_time(packet, field)
                 values.append(value)
-            elif field[1] in (FieldType.BLOB, FieldType.TINY_BLOB,
-                              FieldType.MEDIUM_BLOB, FieldType.LONG_BLOB):
-                (packet, value) = utils.read_lc_string(packet)
-                values.append(value)
             else:
                 (packet, value) = utils.read_lc_string(packet)
-                values.append(value.decode(charset))
+                if field[7] & int(FieldFlag.BINARY):
+                    values.append(value)
+                else:
+                    values.append(value.decode(charset))
 
         return tuple(values)
 
